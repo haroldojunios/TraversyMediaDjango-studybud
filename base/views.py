@@ -1,11 +1,20 @@
 from django.shortcuts import render, redirect
+from django.db.models import Q
 
-from .models import Room
+from .models import Room, Topic
 from .forms import RoomForm
 
 def home(request):
-    rooms = Room.objects.all()
-    context = {'rooms': rooms}
+    query = request.GET.get('q', '')
+    rooms = Room.objects.filter(
+        Q(topic__name__icontains=query) |
+        Q(name__icontains=query) |
+        Q(description__icontains=query)
+    )
+    topics = Topic.objects.all()
+    room_count = rooms.count()
+
+    context = {'rooms': rooms, 'topics': topics, 'room_count': room_count}
     return render(request, 'base/home.html', context)
 
 def room(request, pk):
@@ -29,7 +38,7 @@ def updateRoom(request, pk):
     form = RoomForm(instance=room)
 
     if request.method == 'POST':
-        form = RoomForm(request.POST,instance=room)
+        form = RoomForm(request.POST, instance=room)
         if form.is_valid():
             form.save()
             return redirect('home')
