@@ -31,9 +31,10 @@
       <div class="roomList__header">
         <div>
           <h2>Study Room</h2>
-          <p>{{rooms_count}} available</p>
+          <p>{{rooms_count}}
+            available</p>
         </div>
-        <a class="btn btn--main" href="create-room.html">
+        <a class="btn btn--main" href="{% url 'create-room' %}">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32"
             height="32" viewbox="0 0 32 32">
             <title>add</title>
@@ -49,7 +50,7 @@
     <!-- Room List End -->
 
     <!-- Activities Start -->
-    {% include 'base/activity_component.html' %}
+    {% include "base/activity_component.html" %}
     <!-- Activities End -->
   </div>
 </main>
