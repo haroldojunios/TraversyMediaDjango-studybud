@@ -67,6 +67,9 @@ def home(request):
         | Q(description__icontains=query)
     )
     topics = Topic.objects.all()
+    if len(topics) > 5:
+        topics = topics[:5]
+
     room_count = rooms.count()
     room_messages = Message.objects.filter(
         Q(room__topic__name__icontains=query)
@@ -113,6 +116,13 @@ def user_profile(request, pk):
         'topics': topics,
     }
     return render(request, 'base/profile.html', context)
+
+
+def topics_page(request):
+    query = request.GET.get('q', '')
+    topics = Topic.objects.filter(name__icontains=query)
+    context = {'topics': topics}
+    return render(request, 'base/topics.html', context)
 
 
 @login_required(login_url='login')
