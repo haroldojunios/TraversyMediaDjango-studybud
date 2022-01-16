@@ -125,6 +125,12 @@ def topics_page(request):
     return render(request, 'base/topics.html', context)
 
 
+def activity_page(request):
+    room_messages = Message.objects.all()
+    context = {'room_messages': room_messages}
+    return render(request, 'base/activity.html', context)
+
+
 @login_required(login_url='login')
 def create_room(request):
     form = RoomForm()
