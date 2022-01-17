@@ -1,13 +1,20 @@
 from email.policy import default
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.validators import ASCIIUsernameValidator
 
 
 class User(AbstractUser):
-    name = models.CharField(max_length=200, null=True)
+    name = models.CharField(max_length=50, null=True)
+    username = models.CharField(
+        max_length=50,
+        unique=True,
+        null=True,
+        validators=[ASCIIUsernameValidator()],
+    )
     email = models.EmailField(unique=True, null=True)
-    bio = models.TextField(null=True)
-    avatar = models.ImageField(null=True, default='avatar.svg')
+    bio = models.TextField(null=True, blank=True)
+    avatar = models.ImageField(null=True, blank=True, default='avatar.svg')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
