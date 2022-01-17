@@ -66,6 +66,12 @@
           <div class="form__group form__group">
             <label for="room_name">{{field.label}}</label>
             {{field}}
+            {% if field.errors %}
+            {{field.errors}}
+            {% endif %}
+            {% if field.help_text %}
+            {{field.help_text}}
+            {% endif %}
           </div>
           {% endfor %}
 
