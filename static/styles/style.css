@@ -29,6 +29,7 @@
 
 html {
   font-size: 56.25%;
+  height: 100%;
 }
 
 @media only screen and (min-width: 1200px) {
@@ -50,6 +51,10 @@ body {
   color: var(--color-light-gray);
   background-color: var(--color-bg);
   min-height: 100vh;
+
+  display: flex;
+  flex-flow: column;
+  height: 100%;
 }
 
 img {
@@ -268,6 +273,7 @@ a {
 .header {
   padding: 1.5rem;
   background-color: var(--color-dark);
+  flex: 0 1 auto;
 }
 
 .header > .container {
@@ -391,12 +397,16 @@ a {
 
 .layout {
   margin-top: 2.4rem;
+  padding-bottom: 50px;
+  flex: 1 1 auto;
 }
 
 .layout > .container {
+  height: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .layout--3 > .container > div:first-child {
@@ -425,10 +435,6 @@ a {
   width: 90%;
   max-width: 48rem;
   min-height: 40rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -46%);
   background-color: var(--color-dark);
   border-radius: 1rem;
   box-shadow: 1px 1px 6px 3px rgba(0, 0, 0, 0.1);
